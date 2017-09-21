@@ -3,13 +3,12 @@ require "rspec_api_blueprint/string_extensions"
 
 require "active_support/all"
 
-
 RSpec.configure do |config|
   config.before(:suite) do
     if defined? Rails
-      api_docs_folder_path = File.join(Rails.root, '/api_docs/')
+      api_docs_folder_path = File.join(Rails.root, '/api_docs/raw_markdown/')
     else
-      api_docs_folder_path = File.join(File.expand_path('.'), '/api_docs/')
+      api_docs_folder_path = File.join(File.expand_path('.'), '/api_docs/raw_markdown/')
     end
 
     Dir.mkdir(api_docs_folder_path) unless Dir.exists?(api_docs_folder_path)
@@ -37,9 +36,9 @@ RSpec.configure do |config|
       file_name = $1.underscore
 
       if defined? Rails
-        file = File.join(Rails.root, "/api_docs/#{file_name}.txt")
+        file = File.join(Rails.root, "/api_docs/raw_markdown/#{file_name}.md")
       else
-        file = File.join(File.expand_path('.'), "/api_docs/#{file_name}.txt")
+        file = File.join(File.expand_path('.'), "/api_docs/raw_markdown/#{file_name}.md")
       end
 
       File.open(file, 'a') do |f|
